@@ -12,6 +12,14 @@ cd into the client folder and run
 
 `npm install`
 
+cd out of the client folder and into server 
+
+command for above: 'cd ../server' 
+
+then run: 
+
+'npm install' 
+
 To deploy:  
 
 `npm run dev`
