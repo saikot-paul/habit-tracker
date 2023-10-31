@@ -1,0 +1,52 @@
+/* Login.css */
+
+.login-container {
+    width: 400px; /* Increased width for the container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 30px; /* Increased padding for more space inside the container */
+    border: 1px solid #444; /* Darker border color */
+    border-radius: 5px;
+    background-color: #333; /* Dark background color */
+    text-align: center;
+    color: #fff; /* Light text color */
+    display: flex; /* Use flex display for centering */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+  }
+  
+  .form-group {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Make input fields take the full container width */
+  }
+  
+  .input-field {
+    padding: 10px;
+    border: 1px solid #555; /* Slightly darker border color */
+    border-radius: 5px;
+    background-color: #444; /* Darker background color */
+    color: #fff; /* Light text color */
+    width: 100%; /* Make input fields take the full container width */
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Button color in dark mode */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .login-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error-message {
+    color: #ff0000;
+    margin-top: 10px;
+  }
+  
