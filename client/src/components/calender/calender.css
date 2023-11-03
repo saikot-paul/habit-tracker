@@ -1,9 +1,13 @@
 .container {
     background-color: rgb(137, 195, 223);
     border-radius: 6px;
-    width: 700px;
+    width: 900px;
     margin: auto;
     color: white;
-    font-weight: 500px;
+   font-weight: 500px;
   }
+
+  /* .dateCalendar {
+    background-color: rgb(137, 195, 223);
+  } */
   
