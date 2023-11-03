@@ -1,12 +1,18 @@
 // Login.tsx
 
 import React, { useState } from 'react';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import './assets/Login.css'; // Import your CSS file for styling
+import Home from './pages/Home';
 
 const Login: React.FC = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const gotoHome = () => {
+    navigate('/home');
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +25,6 @@ const Login: React.FC = () => {
     if (user === 'John Doe' && password === 'password') {
       // Simulate a successful login
       setError(''); // Clear any previous error message
-      alert('Logged in successfully!'); // You can replace this with navigation or any other action
     } else {
       setError('Invalid Username or password');
     }
@@ -47,9 +52,12 @@ const Login: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="login-button">
+        <button type="submit" onClick={gotoHome} className="login-button">
           Login
         </button>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+        </Routes>
         {error && <p className="error-message">{error}</p>}
       </form>
     </div>
