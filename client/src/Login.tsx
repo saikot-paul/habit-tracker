@@ -4,29 +4,43 @@ import React, { useState } from 'react';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import './assets/Login.css'; // Import your CSS file for styling
 import Home from './pages/Home';
+import axios from "axios";
 
 const Login: React.FC = () => {
-  const [user, setUser] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const gotoHome = () => {
-    navigate('/home');
+    navigate("/home");
   };
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
+  const baseURL = "http://localhost:3000/";
 
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!user || !password) {
-      setError('Please fill in both fields');
+      setError("Missing both/either username or password");
       return;
     }
 
-    if (user === 'John Doe' && password === 'password') {
-      // Simulate a successful login
-      setError(''); // Clear any previous error message
-    } else {
-      setError('Invalid Username or password');
+    try {
+      await axios
+        .post(baseURL + "login", {
+          username: user,
+          password: password,
+        })
+        .then((response) => {
+          if (response.status == 200 && response.data.success) {
+            setError("");
+            gotoHome();
+          } else {
+            setError(response.data.message);
+            console.log(error);
+          }
+        });
+    } catch (error) {
+      setError("Login Error");
     }
   };
 
@@ -52,7 +66,7 @@ const Login: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" onClick={gotoHome} className="login-button">
+        <button type="submit" className="login-button">
           Login
         </button>
         <Routes>
