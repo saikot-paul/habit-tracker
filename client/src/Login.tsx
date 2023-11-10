@@ -45,8 +45,12 @@ const Login: React.FC = () => {
   };
 
   return (
+    <div>
+    <div className="top-bar">
+    <h1 className="title">Simply<span className="colored-words">Plan.</span></h1>
+  </div>
     <div className="login-container">
-      <h1>Habit Tracker</h1>
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div className="form-group">
           <label>Username:</label>
@@ -69,11 +73,13 @@ const Login: React.FC = () => {
         <button type="submit" className="login-button">
           Login
         </button>
+        <label>Dont have an account? Create one <span className="colored-words">now.</span></label>
         <Routes>
           <Route path="/home" element={<Home />} />
         </Routes>
         {error && <p className="error-message">{error}</p>}
       </form>
+    </div>
     </div>
   );
 };
