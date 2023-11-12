@@ -1,7 +1,7 @@
 /* Login.css */
 .top-bar {
   background-color: var(--primary-color);
-  color: #fff;
+  color: rgb(226, 235, 245);
   min-height: 4em;
   padding: 1em 2.5em 0;
   font-family: 'Montserrat', sans-serif;
@@ -53,7 +53,7 @@
   box-sizing: border-box;
 }
 
-.login-button {
+.login-button, .register-button {
   font-family: 'Montserrat', sans-serif;
   width: 100%;
   padding: 10px;
