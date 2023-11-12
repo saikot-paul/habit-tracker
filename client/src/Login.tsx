@@ -1,9 +1,10 @@
 // Login.tsx
 
 import React, { useState } from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
-import './assets/Login.css'; // Import your CSS file for styling
+import {Routes, Route, useNavigate, Link} from 'react-router-dom';
+import './assets/Login.css';
 import Home from './pages/Home';
+import Register from './pages/Register.tsx';
 import axios from "axios";
 
 const Login: React.FC = () => {
@@ -73,9 +74,10 @@ const Login: React.FC = () => {
         <button type="submit" className="login-button">
           Login
         </button>
-        <label>Dont have an account? Create one <span className="colored-words">now.</span></label>
+        <label>Dont have an account? Create one <Link to="/register"><span className="colored-words">now.</span></Link></label>
         <Routes>
           <Route path="/home" element={<Home />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         {error && <p className="error-message">{error}</p>}
       </form>
