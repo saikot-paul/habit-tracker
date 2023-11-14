@@ -17,7 +17,7 @@ app.use(morgan('tiny'))
 
 //ROUTE USAGE 
 app.post('/login', loginRoute)
-app.post('./create_account', createAccountRoute)
+app.post('/create_account', createAccountRoute)
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`)
