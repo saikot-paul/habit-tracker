@@ -3,7 +3,11 @@ const fs = require('fs');
 const router = express.Router();
 
 router.post('/create_account', (req, res) => {
-  const { username, password } = req.body;
+  const { email, username, password } = req.body;
+
+  console.log(email)
+  console.log(username)
+  console.log(password)
 
   //read file that contains the user data 
   fs.readFile('./routes/users.json', 'utf-8', (err, data) => {
@@ -30,14 +34,14 @@ router.post('/create_account', (req, res) => {
 
       fs.writeFile('./routes/users.json', updatedJsonString, (err) => {
         if (err) {
-          return res.status(500).json({ message: 'Internal Server Error' });
+          return res.status(500).json({success: false, message: 'Internal Server Error' });
         } else {
           return res.status(200).json({ success: true, message: 'Successfully created account' });
         }
       });
     //return 409, stating an account already exists
     } else {
-      return res.status(409).json({ message: 'Login credentials already exist' });
+      return res.status(409).json({ sucess: false, message: 'Login credentials already exist' });
     }
   });
 });
