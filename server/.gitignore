@@ -15,6 +15,7 @@ dist-ssr
 */config.json
 exp.txt
 firebaseConfig.js
+firebase_admin.json
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
