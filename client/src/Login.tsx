@@ -37,7 +37,7 @@ const Login: React.FC = () => {
             gotoHome();
           } else {
             setError(response.data.message);
-            console.log(error);
+            console.log(response.data.message);
           }
         });
     } catch (error) {
