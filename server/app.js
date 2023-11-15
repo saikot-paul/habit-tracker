@@ -5,9 +5,8 @@ const morgan = require('morgan')
 const PORT = 3000
 
 //ROUTE DECLARATIONS 
-const loginRoute = require('./routes/login')
-const createAccountRoute = require('./routes/create_account')
-const createAccountRouteFB = require('./routes/create_account_fb')
+const signup = require('./routes/signup')
+const fetch_data = require('./routes/fetch_data')
 
 
 //MIDDLEWARE USAGE 
@@ -17,9 +16,8 @@ app.use(cors())
 app.use(morgan('tiny'))
 
 //ROUTE USAGE 
-app.post('/login', loginRoute)
-app.post('/create_account', createAccountRoute)
-app.post('/signup', createAccountRouteFB)
+app.post('/signup', signup)
+app.get('/fetch_data', fetch_data)
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`)

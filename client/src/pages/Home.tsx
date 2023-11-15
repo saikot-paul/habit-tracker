@@ -1,11 +1,14 @@
 import NavigationBar from "../components/navBar/NavigationBar";
 import MainContent from './MainContent';
+import { useLocation } from "react-router-dom";
 
 export default function Home() {
+  const location = useLocation();
+
   return (
-    <div className = "main">
+    <div className="main">
       <NavigationBar />
-      <MainContent />
+      <MainContent uid={location.state.uid} />
     </div>
   );
 }
