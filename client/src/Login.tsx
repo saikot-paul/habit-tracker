@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react';
 import {Routes, Route, useNavigate, Link} from 'react-router-dom';
-import './assets/Login.css';
-import Home from './pages/Home';
-import Register from './pages/Register.tsx';
+import './assets/Login.css'; // Import your CSS file for styling
+import Home from './pages/MainContent';
+import Calendar from './pages/Calendar';
+import Register from './pages/Register';
 import axios from "axios";
+import MainContent from './pages/MainContent';
 
 const Login: React.FC = () => {
   const [user, setUser] = useState("");
@@ -13,7 +15,7 @@ const Login: React.FC = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const gotoHome = () => {
-    navigate("/home");
+    navigate("/maincontent");
   };
 
   const baseURL = "http://localhost:3000/";
@@ -76,7 +78,7 @@ const Login: React.FC = () => {
         </button>
         <label>Dont have an account? Create one <Link to="/register"><span className="colored-words">now.</span></Link></label>
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/maincontent" element={<MainContent />} />
           <Route path="/register" element={<Register />} />
         </Routes>
         {error && <p className="error-message">{error}</p>}
