@@ -39,7 +39,7 @@ const Login: React.FC = () => {
             gotoHome();
           } else {
             setError(response.data.message);
-            console.log(response.data.message);
+            console.log(error);
           }
         });
     } catch (error) {
