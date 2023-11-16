@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import {NavLink} from "react-router-dom";
 
-const pages = ["Calendar", "placeholder"];
+const pages = ["Calendar", "Add/Remove"];
 const settings = ["Logout"];
 
 function ResponsiveAppBar() {
@@ -64,8 +64,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            SimplyPlan
-            <NavLink to="/maincontent">HOME</NavLink>
+            <NavLink to="/maincontent">SimplyPlan</NavLink>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
