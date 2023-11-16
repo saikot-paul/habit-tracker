@@ -6,7 +6,6 @@ const PORT = 3000
 
 //ROUTE DECLARATIONS 
 const loginRoute = require('./routes/login')
-const createAccountRoute = require('./routes/create_account')
 
 
 //MIDDLEWARE USAGE 
@@ -17,7 +16,6 @@ app.use(morgan('tiny'))
 
 //ROUTE USAGE 
 app.post('/login', loginRoute)
-app.post('/create_account', createAccountRoute)
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`)
