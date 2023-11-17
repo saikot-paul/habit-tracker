@@ -1,9 +1,11 @@
+
+
 .header {
     background-color: plum;
     padding: 10px;
     text-align: center;
   }
-
+  
 .header h1 {
     font-size: 40px;
     color: purple;
@@ -15,6 +17,30 @@
     color: black;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin: 50px;
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: stretch;
+}
+.item {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    align-items: stretch;
+}
 
 .button-container {
     display: flex;

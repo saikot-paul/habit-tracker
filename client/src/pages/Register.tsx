@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/Login.css";
 import axios from "axios";
@@ -10,8 +10,8 @@ const Register: React.FC = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const gotoHome = () => {
-    navigate("/home");
+  const gotoHome = (uid: string) => {
+    navigate("/maincontent", { state: { uid: uid } });
   };
 
   const baseURL = "http://localhost:3000/";
@@ -27,14 +27,16 @@ const Register: React.FC = () => {
     }
 
     axios
-      .post(baseURL + "create_account", {
+      .post(baseURL + "signup", {
         email: email,
         username: username,
         password: password,
       })
       .then((response) => {
+        console.log(response);
         if (response.status === 200 && response.data.success === true) {
-          gotoHome();
+          const uid = response.data.uid;
+          gotoHome(uid);
         } else {
           setError(response.data.message || "Unknown error occurred");
         }
@@ -99,5 +101,5 @@ const Register: React.FC = () => {
     </div>
   );
 };
-    
+
 export default Register;

@@ -1,14 +1,16 @@
 // Login.tsx
 
-import React, { useState } from 'react';
-import {Routes, Route, useNavigate, Link} from 'react-router-dom';
+import React, { useState } from "react";
+import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import { app } from "./config/firebaseConfig";
 import "./assets/Login.css";
-import Home from "./pages/Home";
-import Register from "./pages/Register.tsx";
 import { getAuth } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth/cordova";
 import { FirebaseError } from "firebase/app";
+import "./assets/Login.css"; // Import your CSS file for styling
+import Home from "./pages/MainContent";
+import Register from "./pages/Register";
+
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +18,7 @@ const Login: React.FC = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const gotoHome = (uid: string) => {
-    navigate("/home", { state: { uid: uid } });
+    navigate("/maincontent", { state: { uid: uid } });
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -103,7 +105,7 @@ const Login: React.FC = () => {
             </Link>
           </label>
           <Routes>
-            <Route path="/home" element={<Home />} />
+            <Route path="/maincontent" element={<Home />} />
             <Route path="/register" element={<Register />} />
           </Routes>
           {error && <p className="error-message">{error}</p>}

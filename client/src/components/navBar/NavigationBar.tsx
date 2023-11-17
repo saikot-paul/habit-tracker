@@ -12,9 +12,12 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { NavLink } from "react-router-dom";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import "./Navbar.css";
+
+const pages = ["Calendar", "AddRemove"];
+const settings = ["Logout"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -39,6 +42,12 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  /* HAVE TO FIGURE OUT LOGOUT FUNCTION
+  const handleLogout = () => {
+    setAnchorElUser(null);
+  };
+  */
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -59,7 +68,12 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            SimplyPlan
+            <NavLink className="title" to="/maincontent">
+              Simply
+            </NavLink>
+            <NavLink className="colored-words" to="/maincontent">
+              Plan
+            </NavLink>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -93,7 +107,9 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <NavLink to={`/maincontent/${page}`}>{page}</NavLink>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -115,7 +131,12 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            <NavLink className="title" to="/maincontent">
+              Simply
+            </NavLink>
+            <NavLink className="colored-words" to="/maincontent">
+              Plan
+            </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -124,7 +145,9 @@ function ResponsiveAppBar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                <NavLink className="navbutton" to={`/maincontent/${page}`}>
+                  {page}
+                </NavLink>
               </Button>
             ))}
           </Box>
@@ -153,7 +176,9 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center">
+                    <NavLink to="/">{settings}</NavLink>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
