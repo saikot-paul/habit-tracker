@@ -54,6 +54,7 @@ export default function MainContent({ uid }: Props) {
       setMeeting(data.meetings);
       setReminder(data.reminders);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Console logs for debugging
