@@ -14,7 +14,9 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import {NavLink} from "react-router-dom";
 
-const pages = ["Calendar", "Add/Remove"];
+import './Navbar.css';
+
+const pages = ["Calendar", "AddRemove"];
 const settings = ["Logout"];
 
 function ResponsiveAppBar() {
@@ -64,7 +66,8 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            <NavLink to="/maincontent">SimplyPlan</NavLink>
+            <NavLink className="title" to="/maincontent">Simply</NavLink>
+            <NavLink className="colored-words" to="/maincontent">Plan</NavLink>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -122,7 +125,8 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            <NavLink to="/maincontent">HOME</NavLink>
+            <NavLink className="title" to="/maincontent">Simply</NavLink>
+            <NavLink className="colored-words" to="/maincontent">Plan</NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -131,7 +135,7 @@ function ResponsiveAppBar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                <NavLink to={`/maincontent/${page}`}>{page}</NavLink>
+                <NavLink className="navbutton" to={`/maincontent/${page}`}>{page}</NavLink>
               </Button>
             ))}
           </Box>
