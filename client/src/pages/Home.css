@@ -19,20 +19,27 @@
 
 .content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-
+    align-items: center;
     gap: 50px;
     margin: 50px;
 }
 
+.item-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: stretch;
+}
 .item {
     background-color: black;
     color: white;
     padding: 20px;
     margin: 20px;
-    text-align: center;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    align-items: stretch;
 }
 
 .button-container {

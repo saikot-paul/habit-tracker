@@ -12,9 +12,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import './Navbar.css';
+import "./Navbar.css";
 
 const pages = ["Calendar", "AddRemove"];
 const settings = ["Logout"];
@@ -42,9 +42,11 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  /* HAVE TO FIGURE OUT LOGOUT FUNCTION
   const handleLogout = () => {
     setAnchorElUser(null);
   };
+  */
 
   return (
     <AppBar position="static">
@@ -66,8 +68,12 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            <NavLink className="title" to="/maincontent">Simply</NavLink>
-            <NavLink className="colored-words" to="/maincontent">Plan</NavLink>
+            <NavLink className="title" to="/maincontent">
+              Simply
+            </NavLink>
+            <NavLink className="colored-words" to="/maincontent">
+              Plan
+            </NavLink>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -125,8 +131,12 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            <NavLink className="title" to="/maincontent">Simply</NavLink>
-            <NavLink className="colored-words" to="/maincontent">Plan</NavLink>
+            <NavLink className="title" to="/maincontent">
+              Simply
+            </NavLink>
+            <NavLink className="colored-words" to="/maincontent">
+              Plan
+            </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -135,7 +145,9 @@ function ResponsiveAppBar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                <NavLink className="navbutton" to={`/maincontent/${page}`}>{page}</NavLink>
+                <NavLink className="navbutton" to={`/maincontent/${page}`}>
+                  {page}
+                </NavLink>
               </Button>
             ))}
           </Box>

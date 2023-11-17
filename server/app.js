@@ -5,7 +5,8 @@ const morgan = require('morgan')
 const PORT = 3000
 
 //ROUTE DECLARATIONS 
-const loginRoute = require('./routes/login')
+const signup = require('./routes/signup')
+const fetch_data = require('./routes/fetch_data')
 
 
 //MIDDLEWARE USAGE 
@@ -15,7 +16,8 @@ app.use(cors())
 app.use(morgan('tiny'))
 
 //ROUTE USAGE 
-app.post('/login', loginRoute)
+app.post('/signup', signup)
+app.get('/fetch_data', fetch_data)
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`)
