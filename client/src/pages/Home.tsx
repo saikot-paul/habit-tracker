@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 import axios from "axios";
+import Button from "@mui/material/Button";
 
 type Props = {
   uid: string;
@@ -35,19 +36,20 @@ export default function MainContent({ uid }: Props) {
   const [reminderList, setReminder] = useState<reminders[]>();
   const baseURL = "http://localhost:3000/";
 
-  useEffect(() => {
-    async function fetch_data(user_id: string) {
-      try {
-        const response = await axios.get(baseURL + "fetch_data", {
-          params: {
-            uid: user_id,
-          },
-        });
-        return response.data;
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
+  async function fetch_data(user_id: string) {
+    try {
+      const response = await axios.get(baseURL + "fetch_data", {
+        params: {
+          uid: user_id,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching data", error);
     }
+  }
+
+  useEffect(() => {
     fetch_data(uid).then((data) => {
       setUserData(data);
       setTask(data.tasks);
@@ -56,6 +58,26 @@ export default function MainContent({ uid }: Props) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const deleteTask = async (uid: string, task_id: string) => {
+    console.log(task_id);
+    console.log(uid);
+
+    await axios.delete(baseURL + "delete_task", {
+      params: {
+        uid: uid,
+        id: task_id,
+      },
+    });
+
+    const updatedData = await fetch_data(uid);
+    if (updatedData) {
+      setUserData(updatedData);
+      setTask(updatedData.tasks);
+      setMeeting(updatedData.meetings);
+      setReminder(updatedData.reminders);
+    }
+  };
 
   // Console logs for debugging
   console.log("User ID:", uid);
@@ -71,7 +93,7 @@ export default function MainContent({ uid }: Props) {
         <p>Here are your upcoming tasks, meetings and reminders</p>
       </div>
       <div className="content">
-        <div className="item-container">
+        <div className="content-container">
           {taskList && taskList.length > 0 ? (
             <div className="item">
               <h2>Tasks</h2>
@@ -82,11 +104,30 @@ export default function MainContent({ uid }: Props) {
                     <li>{item.description}</li>
                     <li>Due: {item.due_date}</li>
                   </ul>
+                  <Button
+                    type="button"
+                    color="error"
+                    onClick={() => deleteTask(item.uid, item.id)}
+                  >
+                    Delete Task
+                  </Button>
                 </div>
               ))}
+              <div className="add-remove">
+                <Button type="button" color="success">
+                  ADD TASK
+                </Button>
+              </div>
             </div>
           ) : (
-            <div className="item">No tasks to display.</div>
+            <div className="item">
+              <div>No tasks to display</div>
+              <div className="add-remove">
+                <Button type="button" color="success">
+                  ADD TASK
+                </Button>
+              </div>
+            </div>
           )}
           {meetingList && meetingList.length > 0 ? (
             <div className="item">
@@ -98,11 +139,30 @@ export default function MainContent({ uid }: Props) {
                     <li>Start: {item.start_time}</li>
                     <li>End: {item.end_time}</li>
                   </ul>
+                  <Button
+                    type="button"
+                    color="error"
+                    onClick={() => deleteTask(item.uid, item.id)}
+                  >
+                    Delete Task
+                  </Button>
                 </div>
               ))}
+              <div className="add-remove">
+                <Button type="button" color="success">
+                  ADD TASK
+                </Button>
+              </div>
             </div>
           ) : (
-            <div className="item">No tasks to display.</div>
+            <div className="item">
+              <div>No meetings to display</div>
+              <div className="add-remove">
+                <Button type="button" color="success">
+                  ADD TASK
+                </Button>
+              </div>
+            </div>
           )}
           {reminderList && reminderList.length > 0 ? (
             <div className="item">
@@ -114,20 +174,29 @@ export default function MainContent({ uid }: Props) {
                     <li>{item.description}</li>
                     <li>Date: {item.reminder_time}</li>
                   </ul>
+                  <Button
+                    type="button"
+                    color="error"
+                    onClick={() => deleteTask(item.uid, item.id)}
+                  >
+                    Delete Task
+                  </Button>
                 </div>
               ))}
+              <div className="add-remove">
+                <Button type="button" color="success">
+                  ADD TASK
+                </Button>
+              </div>
             </div>
           ) : (
-            <div className="item">No tasks to display.</div>
+            <div className="item">
+              <div>No reminders to display</div>
+              <Button type="button" color="success">
+                ADD TASK
+              </Button>
+            </div>
           )}
-        </div>
-        <div className="button-container">
-          <p className="button-header">ADD ITEM</p>
-          <button className="add-item">+</button>
-        </div>
-        <div className="button-container">
-          <p className="button-header">ADD ITEM</p>
-          <button className="add-item">+</button>
         </div>
       </div>
     </div>

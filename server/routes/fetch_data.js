@@ -3,8 +3,7 @@ const { db } = require('./config/firebase_admin');
 const router = express.Router();
 
 router.get('/fetch_data', async (req, res) => {
-    console.log('Called');
-    console.log(req)
+    console.log('Called fetch data');
     const uid = req.query.uid;
 
     console.log(uid)
