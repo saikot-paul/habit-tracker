@@ -4,7 +4,10 @@ const router = express.Router();
 
 router.get('/fetch_data', async (req, res) => {
     console.log('Called');
+    console.log(req)
     const uid = req.query.uid;
+
+    console.log(uid)
 
     // Define the queries for each collection
     const tasksQuery = db.collection('tasks').where('uid', '==', uid).get();

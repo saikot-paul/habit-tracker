@@ -16,7 +16,7 @@ const Register: React.FC = () => {
 
   const baseURL = "http://localhost:3000/";
 
-  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email || !username || !password) {
@@ -26,7 +26,7 @@ const Register: React.FC = () => {
       return;
     }
 
-    axios
+    await axios
       .post(baseURL + "signup", {
         email: email,
         username: username,
@@ -35,17 +35,16 @@ const Register: React.FC = () => {
       .then((response) => {
         console.log(response);
         if (response.status === 200 && response.data.success === true) {
-          const uid = response.data.uid;
+          const uid = response.data.user.uid;
+          console.log(uid);
           gotoHome(uid);
         } else {
           setError(response.data.message || "Unknown error occurred");
         }
       })
       .catch((error) => {
-        setError(
-          error.response?.data?.message ||
-            "Error occurred creating account, please try again at a later time"
-        );
+        console.log(error);
+        setError(error.response.data.message);
       });
   };
 
