@@ -79,6 +79,45 @@ export default function MainContent({ uid }: Props) {
     }
   };
 
+  const deleteReminder = async (uid: string, reminder_id: string) => {
+    console.log(reminder_id);
+    console.log(uid);
+
+    await axios.delete(baseURL + "delete_reminder", {
+      params: {
+        uid: uid,
+        id: reminder_id,
+      },
+    });
+
+    const updatedData = await fetch_data(uid);
+    if (updatedData) {
+      setUserData(updatedData);
+      setTask(updatedData.tasks);
+      setMeeting(updatedData.meetings);
+      setReminder(updatedData.reminders);
+    }
+  };
+  const deleteMeeting = async (uid: string, reminder_id: string) => {
+    console.log(reminder_id);
+    console.log(uid);
+
+    await axios.delete(baseURL + "delete_meeting", {
+      params: {
+        uid: uid,
+        id: reminder_id,
+      },
+    });
+
+    const updatedData = await fetch_data(uid);
+    if (updatedData) {
+      setUserData(updatedData);
+      setTask(updatedData.tasks);
+      setMeeting(updatedData.meetings);
+      setReminder(updatedData.reminders);
+    }
+  };
+
   // Console logs for debugging
   console.log("User ID:", uid);
   console.log("User Data:", userData);
@@ -104,6 +143,9 @@ export default function MainContent({ uid }: Props) {
                     <li>{item.description}</li>
                     <li>Due: {item.due_date}</li>
                   </ul>
+                  <Button type="button" color="primary">
+                    UPDATE TASK
+                  </Button>
                   <Button
                     type="button"
                     color="error"
@@ -139,18 +181,21 @@ export default function MainContent({ uid }: Props) {
                     <li>Start: {item.start_time}</li>
                     <li>End: {item.end_time}</li>
                   </ul>
+                  <Button type="button" color="primary">
+                    UPDATE MEETING
+                  </Button>
                   <Button
                     type="button"
                     color="error"
-                    onClick={() => deleteTask(item.uid, item.id)}
+                    onClick={() => deleteMeeting(item.uid, item.id)}
                   >
-                    Delete Task
+                    DELETE MEETING
                   </Button>
                 </div>
               ))}
               <div className="add-remove">
                 <Button type="button" color="success">
-                  ADD TASK
+                  ADD MEETING
                 </Button>
               </div>
             </div>
@@ -159,7 +204,7 @@ export default function MainContent({ uid }: Props) {
               <div>No meetings to display</div>
               <div className="add-remove">
                 <Button type="button" color="success">
-                  ADD TASK
+                  ADD MEETING
                 </Button>
               </div>
             </div>
@@ -174,18 +219,21 @@ export default function MainContent({ uid }: Props) {
                     <li>{item.description}</li>
                     <li>Date: {item.reminder_time}</li>
                   </ul>
+                  <Button type="button" color="primary">
+                    UPDATE REMINDER
+                  </Button>
                   <Button
                     type="button"
                     color="error"
-                    onClick={() => deleteTask(item.uid, item.id)}
+                    onClick={() => deleteReminder(item.uid, item.id)}
                   >
-                    Delete Task
+                    DELETE REMINDER
                   </Button>
                 </div>
               ))}
               <div className="add-remove">
                 <Button type="button" color="success">
-                  ADD TASK
+                  ADD REMINDER
                 </Button>
               </div>
             </div>
