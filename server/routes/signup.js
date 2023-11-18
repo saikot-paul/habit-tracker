@@ -11,14 +11,17 @@ router.post('/signup', async (req, res) => {
 
         const userData = {
             username: req.body.username,
+            email : req.body.email, 
             uid: userRecord.uid
         };
 
-        await db.collection('users').doc(userRecord.uid).set(userData);
+        const response = await db.collection('users').doc(userRecord.uid).set(userData);
 
         return res.status(200).json({ success: true, user: { uid: userRecord.uid, email: userRecord.email } });
 
     } catch (error) {
+
+        console.log(error)
         let message = 'Error creating user';
         let statusCode = 500;
 
@@ -27,7 +30,7 @@ router.post('/signup', async (req, res) => {
             statusCode = 409;
         }
 
-        return res.status(statusCode).json({ success: false, message: message });
+        return res.status(statusCode).json({ success: false, message: error.message });
     }
 });
 

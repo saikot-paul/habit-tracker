@@ -33,10 +33,10 @@ export default function MainContent({ uid }: Props) {
   const [taskList, setTask] = useState<tasks[]>();
   const [meetingList, setMeeting] = useState<meetings[]>();
   const [reminderList, setReminder] = useState<reminders[]>();
+  const baseURL = "http://localhost:3000/";
 
   useEffect(() => {
     async function fetch_data(user_id: string) {
-      const baseURL = "http://localhost:3000/";
       try {
         const response = await axios.get(baseURL + "fetch_data", {
           params: {
@@ -86,7 +86,7 @@ export default function MainContent({ uid }: Props) {
               ))}
             </div>
           ) : (
-            <div>No tasks to display.</div>
+            <div className="item">No tasks to display.</div>
           )}
           {meetingList && meetingList.length > 0 ? (
             <div className="item">
@@ -102,7 +102,7 @@ export default function MainContent({ uid }: Props) {
               ))}
             </div>
           ) : (
-            <div>No tasks to display.</div>
+            <div className="item">No tasks to display.</div>
           )}
           {reminderList && reminderList.length > 0 ? (
             <div className="item">
@@ -118,14 +118,17 @@ export default function MainContent({ uid }: Props) {
               ))}
             </div>
           ) : (
-            <div>No tasks to display.</div>
+            <div className="item">No tasks to display.</div>
           )}
         </div>
         <div className="button-container">
           <p className="button-header">ADD ITEM</p>
           <button className="add-item">+</button>
         </div>
-        <div></div>
+        <div className="button-container">
+          <p className="button-header">ADD ITEM</p>
+          <button className="add-item">+</button>
+        </div>
       </div>
     </div>
   );
