@@ -10,7 +10,7 @@ const fetch_data = require('./routes/fetch_data')
 const delete_task = require('./routes/delete_task')
 const delete_reminder = require('./routes/delete_reminder')
 const delete_meeting = require('./routes/delete_meeting')
-
+const create_reminder = require('./routes/create_reminder')
 
 //MIDDLEWARE USAGE 
 const app = express()
@@ -20,6 +20,7 @@ app.use(morgan('tiny'))
 
 //ROUTE USAGE 
 app.post('/signup', signup)
+app.post('/create_reminder', create_reminder)
 app.get('/fetch_data', fetch_data)
 app.delete('/delete_task', delete_task)
 app.delete('/delete_reminder', delete_reminder)

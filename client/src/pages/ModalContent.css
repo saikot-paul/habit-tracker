@@ -1,0 +1,17 @@
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.modal-box {
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  margin-top: 20px;
+}
