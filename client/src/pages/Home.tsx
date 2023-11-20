@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 import axios from "axios";
+import ModalContent from './ModalContent';
 import Button from "@mui/material/Button";
 
 type Props = {
@@ -34,7 +35,24 @@ export default function MainContent({ uid }: Props) {
   const [taskList, setTask] = useState<tasks[]>();
   const [meetingList, setMeeting] = useState<meetings[]>();
   const [reminderList, setReminder] = useState<reminders[]>();
+  const [showModal, setShowModal] = useState(false);
+
   const baseURL = "http://localhost:3000/";
+  
+  const addReminder = () => {
+    setShowModal(true);
+  };
+
+  const handleClose = async () => {
+    const updatedData = await fetch_data(uid);
+    if (updatedData) {
+      setUserData(updatedData);
+      setTask(updatedData.tasks);
+      setMeeting(updatedData.meetings);
+      setReminder(updatedData.reminders);
+    }
+    setShowModal(false);
+  };
 
   async function fetch_data(user_id: string) {
     try {
@@ -232,17 +250,20 @@ export default function MainContent({ uid }: Props) {
                 </div>
               ))}
               <div className="add-remove">
-                <Button type="button" color="success">
+                <Button type="button" color="success" onClick={addReminder}>
                   ADD REMINDER
                 </Button>
               </div>
+               
+                <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
             </div>
           ) : (
             <div className="item">
               <div>No reminders to display</div>
-              <Button type="button" color="success">
-                ADD TASK
+              <Button type="button" color="success" onClick = {addReminder}>
+                ADD REMINDER
               </Button>
+              <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
             </div>
           )}
         </div>
