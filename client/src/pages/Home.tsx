@@ -154,12 +154,11 @@ export default function MainContent({ uid }: Props) {
           {taskList && taskList.length > 0 ? (
             <div className="item">
               <h2>Tasks</h2>
-              {taskList.map((item, index) => (
+              {taskList.map((item) => (
                 <div className="sub-item" key={item.id}>
-                  <h3>Task {index + 1}</h3>
+                  <h3>{item.description}</h3>
                   <ul>
-                    <li>{item.description}</li>
-                    <li>Due: {item.due_date}</li>
+                    <li>Due Date: {item.due_date}</li>
                   </ul>
                   <Button type="button" color="primary">
                     UPDATE TASK
@@ -254,16 +253,16 @@ export default function MainContent({ uid }: Props) {
                   ADD REMINDER
                 </Button>
               </div>
-               
-                <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
+
+              <ModalContent open={showModal} onClose={handleClose} uid={uid} />
             </div>
           ) : (
             <div className="item">
               <div>No reminders to display</div>
-              <Button type="button" color="success" onClick = {addReminder}>
+              <Button type="button" color="success" onClick={addReminder}>
                 ADD REMINDER
               </Button>
-              <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
+              <ModalContent open={showModal} onClose={handleClose} uid={uid} />
             </div>
           )}
         </div>
