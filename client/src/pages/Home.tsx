@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import axios from "axios";
 import ModalContent from './ModalContent';
+
+import ModalContentTask from './ModalContentTask';
+import ModalContentMeeting from './ModalContentMeeting';
+
 import Button from "@mui/material/Button";
 
 type Props = {
@@ -25,7 +29,7 @@ interface meetings {
 
 interface reminders {
   description: string;
-  reminder_time: string;
+  date: string;
   id: string;
   uid: string;
 }
@@ -37,11 +41,26 @@ export default function MainContent({ uid }: Props) {
   const [reminderList, setReminder] = useState<reminders[]>();
   const [showModal, setShowModal] = useState(false);
 
+  const [showModalTask, setShowModalTask] = useState(false);
+  const [showModalMeeting, setShowModalMeeting] = useState(false);
+
+
+
   const baseURL = "http://localhost:3000/";
   
   const addReminder = () => {
     setShowModal(true);
   };
+
+
+  const addTask = () => {
+    setShowModalTask(true);
+  };
+
+  const addMeeting = () => {
+    setShowModalMeeting(true);
+  };
+
 
   const handleClose = async () => {
     const updatedData = await fetch_data(uid);
@@ -52,6 +71,9 @@ export default function MainContent({ uid }: Props) {
       setReminder(updatedData.reminders);
     }
     setShowModal(false);
+
+    setShowModalTask(false);
+    setShowModalMeeting(false);
   };
 
   async function fetch_data(user_id: string) {
@@ -173,18 +195,20 @@ export default function MainContent({ uid }: Props) {
                 </div>
               ))}
               <div className="add-remove">
-                <Button type="button" color="success">
+              <Button type="button" color="success" onClick = {addTask}>
                   ADD TASK
                 </Button>
               </div>
+                <ModalContentTask open={showModalTask} onClose={handleClose} uid = {uid}/>
             </div>
           ) : (
             <div className="item">
               <div>No tasks to display</div>
               <div className="add-remove">
-                <Button type="button" color="success">
+              <Button type="button" color="success" onClick = {addTask}>
                   ADD TASK
                 </Button>
+                <ModalContentTask open={showModalTask} onClose={handleClose} uid = {uid}/>
               </div>
             </div>
           )}
@@ -211,18 +235,20 @@ export default function MainContent({ uid }: Props) {
                 </div>
               ))}
               <div className="add-remove">
-                <Button type="button" color="success">
+              <Button type="button" color="success" onClick = {addMeeting}>
                   ADD MEETING
                 </Button>
               </div>
+              <ModalContentMeeting open={showModalMeeting} onClose={handleClose} uid = {uid}/>
             </div>
           ) : (
             <div className="item">
               <div>No meetings to display</div>
               <div className="add-remove">
-                <Button type="button" color="success">
+              <Button type="button" color="success" onClick = {addMeeting}>
                   ADD MEETING
                 </Button>
+                <ModalContentMeeting open={showModalMeeting} onClose={handleClose} uid = {uid}/>
               </div>
             </div>
           )}
@@ -234,7 +260,7 @@ export default function MainContent({ uid }: Props) {
                   <h3>Reminder {index + 1}</h3>
                   <ul>
                     <li>{item.description}</li>
-                    <li>Date: {item.reminder_time}</li>
+                    <li>Date: {item.date}</li>
                   </ul>
                   <Button type="button" color="primary">
                     UPDATE REMINDER
@@ -254,15 +280,27 @@ export default function MainContent({ uid }: Props) {
                 </Button>
               </div>
 
+               
+                <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
+
+
               <ModalContent open={showModal} onClose={handleClose} uid={uid} />
+
             </div>
           ) : (
             <div className="item">
               <div>No reminders to display</div>
+
+              <Button type="button" color="success" onClick = {addReminder}>
+                ADD REMINDER
+              </Button>
+              <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
+
               <Button type="button" color="success" onClick={addReminder}>
                 ADD REMINDER
               </Button>
               <ModalContent open={showModal} onClose={handleClose} uid={uid} />
+
             </div>
           )}
         </div>
