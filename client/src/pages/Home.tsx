@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import axios from "axios";
 import ModalContent from './ModalContent';
+
 import ModalContentTask from './ModalContentTask';
 import ModalContentMeeting from './ModalContentMeeting';
+
 import Button from "@mui/material/Button";
 
 type Props = {
@@ -38,14 +40,18 @@ export default function MainContent({ uid }: Props) {
   const [meetingList, setMeeting] = useState<meetings[]>();
   const [reminderList, setReminder] = useState<reminders[]>();
   const [showModal, setShowModal] = useState(false);
+
   const [showModalTask, setShowModalTask] = useState(false);
   const [showModalMeeting, setShowModalMeeting] = useState(false);
+
+
 
   const baseURL = "http://localhost:3000/";
   
   const addReminder = () => {
     setShowModal(true);
   };
+
 
   const addTask = () => {
     setShowModalTask(true);
@@ -54,6 +60,7 @@ export default function MainContent({ uid }: Props) {
   const addMeeting = () => {
     setShowModalMeeting(true);
   };
+
 
   const handleClose = async () => {
     const updatedData = await fetch_data(uid);
@@ -64,6 +71,7 @@ export default function MainContent({ uid }: Props) {
       setReminder(updatedData.reminders);
     }
     setShowModal(false);
+
     setShowModalTask(false);
     setShowModalMeeting(false);
   };
@@ -168,12 +176,11 @@ export default function MainContent({ uid }: Props) {
           {taskList && taskList.length > 0 ? (
             <div className="item">
               <h2>Tasks</h2>
-              {taskList.map((item, index) => (
+              {taskList.map((item) => (
                 <div className="sub-item" key={item.id}>
-                  <h3>Task {index + 1}</h3>
+                  <h3>{item.description}</h3>
                   <ul>
-                    <li>{item.description}</li>
-                    <li>Due: {item.due_date}</li>
+                    <li>Due Date: {item.due_date}</li>
                   </ul>
                   <Button type="button" color="primary">
                     UPDATE TASK
@@ -272,16 +279,28 @@ export default function MainContent({ uid }: Props) {
                   ADD REMINDER
                 </Button>
               </div>
+
                
                 <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
+
+
+              <ModalContent open={showModal} onClose={handleClose} uid={uid} />
+
             </div>
           ) : (
             <div className="item">
               <div>No reminders to display</div>
+
               <Button type="button" color="success" onClick = {addReminder}>
                 ADD REMINDER
               </Button>
               <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
+
+              <Button type="button" color="success" onClick={addReminder}>
+                ADD REMINDER
+              </Button>
+              <ModalContent open={showModal} onClose={handleClose} uid={uid} />
+
             </div>
           )}
         </div>
