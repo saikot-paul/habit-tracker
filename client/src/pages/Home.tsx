@@ -278,29 +278,16 @@ export default function MainContent({ uid }: Props) {
                 <Button type="button" color="success" onClick={addReminder}>
                   ADD REMINDER
                 </Button>
-              </div>
-
-               
+              </div>   
                 <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
-
-
-              <ModalContent open={showModal} onClose={handleClose} uid={uid} />
-
             </div>
           ) : (
             <div className="item">
               <div>No reminders to display</div>
-
               <Button type="button" color="success" onClick = {addReminder}>
                 ADD REMINDER
               </Button>
-              <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
-
-              <Button type="button" color="success" onClick={addReminder}>
-                ADD REMINDER
-              </Button>
-              <ModalContent open={showModal} onClose={handleClose} uid={uid} />
-
+              <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>    
             </div>
           )}
         </div>
