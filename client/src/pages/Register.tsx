@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/Login.css";
 import axios from "axios";
+import emailjs from '@emailjs/browser';
+
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = 'service_q8w00yl';
+const EMAILJS_TEMPLATE_ID = 'template_r05vhw8';
+(function(){
+  emailjs.init("AF8-pgZInaRGZXMXt");
+})();
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -36,6 +44,21 @@ const Register: React.FC = () => {
         console.log(response);
         if (response.status === 200 && response.data.success === true) {
           const uid = response.data.user.uid;
+          const uemail = response.data.user.email;
+          const verificationLink = response.data.verificationLink;
+          console.log("verif below");
+          console.log(verificationLink);
+          const templateParams = {
+            to_email: uemail,
+            verification_link: verificationLink
+        };
+          // send verification email
+          emailjs.send(
+              EMAILJS_SERVICE_ID,
+              EMAILJS_TEMPLATE_ID,
+              templateParams
+          );
+
           console.log(uid);
           gotoHome(uid);
         } else {
