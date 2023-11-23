@@ -195,20 +195,28 @@ export default function MainContent({ uid }: Props) {
                 </div>
               ))}
               <div className="add-remove">
-              <Button type="button" color="success" onClick = {addTask}>
+                <Button type="button" color="success" onClick={addTask}>
                   ADD TASK
                 </Button>
               </div>
-                <ModalContentTask open={showModalTask} onClose={handleClose} uid = {uid}/>
+              <ModalContentTask
+                open={showModalTask}
+                onClose={handleClose}
+                uid={uid}
+              />
             </div>
           ) : (
             <div className="item">
               <div>No tasks to display</div>
               <div className="add-remove">
-              <Button type="button" color="success" onClick = {addTask}>
+                <Button type="button" color="success" onClick={addTask}>
                   ADD TASK
                 </Button>
-                <ModalContentTask open={showModalTask} onClose={handleClose} uid = {uid}/>
+                <ModalContentTask
+                  open={showModalTask}
+                  onClose={handleClose}
+                  uid={uid}
+                />
               </div>
             </div>
           )}
@@ -235,29 +243,37 @@ export default function MainContent({ uid }: Props) {
                 </div>
               ))}
               <div className="add-remove">
-              <Button type="button" color="success" onClick = {addMeeting}>
+                <Button type="button" color="success" onClick={addMeeting}>
                   ADD MEETING
                 </Button>
               </div>
-              <ModalContentMeeting open={showModalMeeting} onClose={handleClose} uid = {uid}/>
+              <ModalContentMeeting
+                open={showModalMeeting}
+                onClose={handleClose}
+                uid={uid}
+              />
             </div>
           ) : (
             <div className="item">
               <div>No meetings to display</div>
               <div className="add-remove">
-              <Button type="button" color="success" onClick = {addMeeting}>
+                <Button type="button" color="success" onClick={addMeeting}>
                   ADD MEETING
                 </Button>
-                <ModalContentMeeting open={showModalMeeting} onClose={handleClose} uid = {uid}/>
+                <ModalContentMeeting
+                  open={showModalMeeting}
+                  onClose={handleClose}
+                  uid={uid}
+                />
               </div>
             </div>
           )}
           {reminderList && reminderList.length > 0 ? (
             <div className="item">
               <h2>Reminders</h2>
-              {reminderList.map((item, index) => (
+              {reminderList.map((item) => (
                 <div className="sub-item" key={item.id}>
-                  <h3>Reminder {index + 1}</h3>
+                  <h3>{item.description}</h3>
                   <ul>
                     <li>{item.description}</li>
                     <li>Date: {item.date}</li>
@@ -278,16 +294,16 @@ export default function MainContent({ uid }: Props) {
                 <Button type="button" color="success" onClick={addReminder}>
                   ADD REMINDER
                 </Button>
-              </div>   
-                <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>
+              </div>
+              <ModalContent open={showModal} onClose={handleClose} uid={uid} />
             </div>
           ) : (
             <div className="item">
               <div>No reminders to display</div>
-              <Button type="button" color="success" onClick = {addReminder}>
+              <Button type="button" color="success" onClick={addReminder}>
                 ADD REMINDER
               </Button>
-              <ModalContent open={showModal} onClose={handleClose} uid = {uid}/>    
+              <ModalContent open={showModal} onClose={handleClose} uid={uid} />
             </div>
           )}
         </div>
