@@ -31,8 +31,15 @@ const Login: React.FC = () => {
       }
       const auth = getAuth(app);
       const userCreds = await signInWithEmailAndPassword(auth, email, password);
-      const uid = userCreds.user.uid;
-      gotoHome(uid);
+      const user = userCreds.user;
+
+      if (user && user.emailVerified) {
+        const uid = user.uid;
+        gotoHome(uid);
+      } else {
+        setError("Please verify your email to log in.");
+      }
+
     } catch (e) {
       if (e instanceof FirebaseError) {
         switch (e.code) {

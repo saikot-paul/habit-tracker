@@ -18,7 +18,7 @@ router.post('/signup', async (req, res) => {
         const response = await db.collection('users').doc(userRecord.uid).set(userData);
 
         const actionCodeSettings = {
-            url: 'http://localhost:3000/login', // Replace with your verification URL
+            url: 'http://localhost:3000/login',
             handleCodeInApp: true
         };
     

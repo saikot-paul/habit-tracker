@@ -18,8 +18,8 @@ const Register: React.FC = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const gotoHome = (uid: string) => {
-    navigate("/maincontent", { state: { uid: uid } });
+  const gotoEmailVerif = (uid: string) => {
+    navigate("/verify-email", { state: { uid: uid } });
   };
 
   const baseURL = "http://localhost:3000/";
@@ -46,7 +46,6 @@ const Register: React.FC = () => {
           const uid = response.data.user.uid;
           const uemail = response.data.user.email;
           const verificationLink = response.data.verificationLink;
-          console.log("verif below");
           console.log(verificationLink);
           const templateParams = {
             to_email: uemail,
@@ -60,7 +59,7 @@ const Register: React.FC = () => {
           );
 
           console.log(uid);
-          gotoHome(uid);
+          gotoEmailVerif(uid);
         } else {
           setError(response.data.message || "Unknown error occurred");
         }
