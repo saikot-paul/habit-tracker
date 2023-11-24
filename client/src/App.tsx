@@ -4,6 +4,8 @@ import Login from './Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import MainContent from './pages/MainContent';
+import EmailVerification from './pages/EmailVerification';
+import EmailVerified from './pages/EmailVerified';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="maincontent/*" element={<MainContent />} />
+        <Route path="/verify-email" element={<EmailVerification />} />
+        <Route path="/email-verified" element={<EmailVerified />} />
       </Routes>
     </Router>
   );

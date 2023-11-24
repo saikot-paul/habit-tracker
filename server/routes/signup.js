@@ -17,7 +17,15 @@ router.post('/signup', async (req, res) => {
 
         const response = await db.collection('users').doc(userRecord.uid).set(userData);
 
-        return res.status(200).json({ success: true, user: { uid: userRecord.uid, email: userRecord.email } });
+        const actionCodeSettings = {
+            url: 'http://localhost:3000/login',
+            handleCodeInApp: true
+        };
+    
+        const verificationLink = await admin.auth().generateEmailVerificationLink(req.body.email, actionCodeSettings);
+        console.log(verificationLink);
+        
+        return res.status(200).json({ success: true, user: { uid: userRecord.uid, email: userRecord.email }, verificationLink: verificationLink });
 
     } catch (error) {
 

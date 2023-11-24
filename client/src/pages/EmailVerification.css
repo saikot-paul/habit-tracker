@@ -1,0 +1,19 @@
+.header {
+    background-color: green;
+    padding: 10px;
+    text-align: center;
+  }
+  
+.header h1 {
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    margin: 10px;
+}
+
+.top p {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin: 50px;
+}
