@@ -6,7 +6,8 @@ import ModalContent from './ModalContent';
 import ModalContentTask from './ModalContentTask';
 import ModalContentMeeting from './ModalContentMeeting';
 import ModalUpdateTask from './ModalUpdateTask';
-
+import ModalUpdateReminder from './ModalUpdateReminder';
+import ModalUpdateMeeting from './ModalUpdateMeeting';
 import Button from "@mui/material/Button";
 
 type Props = {
