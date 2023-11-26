@@ -2,7 +2,7 @@ const express = require('express');
 const { db } = require('./config/firebase_admin');
 const router = express.Router();
 
-router.post('/create_reminder', async(req, res) => {
+router.post('create_reminder/', async(req, res) => {
     try{
         const uid = req.body.uid;
         const description = req.body.description;
