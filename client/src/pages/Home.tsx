@@ -46,7 +46,7 @@ export default function MainContent({ uid }: Props) {
 
 
 
-  const baseURL = "http://localhost:3000/";
+  const baseURL = "http://localhost:5173/";
   
   const addReminder = () => {
     setShowModal(true);

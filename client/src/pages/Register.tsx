@@ -22,7 +22,7 @@ const Register: React.FC = () => {
     navigate("/verify-email", { state: { uid: uid } });
   };
 
-  const baseURL = "http://localhost:3000/";
+  const baseURL = "http://localhost:5173/";
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

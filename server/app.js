@@ -2,7 +2,7 @@
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
-const PORT = 3000
+const PORT = 5173
 
 //ROUTE DECLARATIONS 
 const signup = require('./routes/signup')

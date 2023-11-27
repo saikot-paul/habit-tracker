@@ -13,38 +13,31 @@ type Props =  {
 }
 
 export default function ModalContentTask({ open, onClose, uid }: Props) {
-  const baseURL = "http://localhost:3000/";
+  const baseURL = "http://localhost:5173/";
   const [description, setDescription] = useState("");
   const [due_date, setDate] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-        
-        console.log("uid:", uid);
-        console.log("description:", description);
-        console.log("date:", due_date);
-      
-        await axios.post(baseURL + "create_task", {
+      console.log("uid:", uid);
+      console.log("description:", description);
+      console.log("date:", due_date);
+
+      await axios.post(baseURL + "create_task", {
         uid: uid,
         due_date: due_date,
         description: description,
       });
-      
+
       onClose();
-      
     } catch (error) {
-      
       console.error("Error submitting form:", error);
     }
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      aria-describedby="modal-description"
-    >
+    <Modal open={open} onClose={onClose} aria-describedby="modal-description">
       <div className="modal-container">
         <Button onClick={onClose}>Close</Button>
         <div className="modal-box">
@@ -77,4 +70,4 @@ export default function ModalContentTask({ open, onClose, uid }: Props) {
       </div>
     </Modal>
   );
-};
+}
