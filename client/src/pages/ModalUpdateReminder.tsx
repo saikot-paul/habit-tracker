@@ -21,7 +21,7 @@ export default function ModalUpdateReminder({ open, onClose, uid, reminderId}: P
   useEffect(() => {
     const fetchMeetingDetails = async () => {
       try {
-        const response = await axios.get(baseURL + `get_meeting/${reminderId}`, {
+        const response = await axios.get(baseURL + "fetch_data", {
           params: {
             uid: uid,
           },
@@ -40,7 +40,7 @@ export default function ModalUpdateReminder({ open, onClose, uid, reminderId}: P
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-        await axios.put(baseURL + "create_task", {
+        await axios.put(baseURL + `update_reminder/${uid}`, {
         uid: uid,
         due_date: due_date,
         description: description,

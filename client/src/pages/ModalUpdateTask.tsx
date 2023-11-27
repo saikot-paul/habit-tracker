@@ -23,7 +23,7 @@ export default function ModalUpdateTask({ open, onClose, uid, taskId }: Props) {
     // Fetch the task details based on taskId
     const fetchTaskDetails = async () => {
       try {
-        const response = await axios.get(baseURL + `get_task/${taskId}`, {
+        const response = await axios.get(baseURL + "fetch_data", {
           params: {
             uid: uid,
           },
@@ -42,7 +42,7 @@ export default function ModalUpdateTask({ open, onClose, uid, taskId }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.put(baseURL + `update_task/${taskId}`, {
+      await axios.put(baseURL + `update_task/${uid}`, {
         uid: uid,
         due_date: dueDate,
         description: description,

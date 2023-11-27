@@ -22,7 +22,7 @@ export default function ModalUpdateMeeting({ open, onClose, uid, meetingId }: Pr
   useEffect(() => {
     const fetchMeetingDetails = async () => {
       try {
-        const response = await axios.get(baseURL + `get_task/${meetingId}`, {
+        const response = await axios.get(baseURL + "fetch_data", {
           params: {
             uid: uid,
           },
@@ -47,7 +47,7 @@ export default function ModalUpdateMeeting({ open, onClose, uid, meetingId }: Pr
         console.log("start time:", start_time);
         console.log("end time:", end_time);
       
-        await axios.put(baseURL + "create_meeting", {
+        await axios.put(baseURL + `update_meeting/${uid}`, {
         uid: uid,
         start_time: start_time,
         end_time: end_time,
