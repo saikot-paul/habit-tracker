@@ -182,9 +182,17 @@ export default function MainContent({ uid }: Props) {
                   <ul>
                     <li>Due Date: {item.due_date}</li>
                   </ul>
-                  <Button type="button" color="primary">
+                  <Button type="button" color="primary" onClick={async () => {
+                  addTask();
+                  deleteTask(item.uid, item.id);
+                  }}>
                     UPDATE TASK
                   </Button>
+                  <ModalContentTask
+                  open={showModalTask}
+                  onClose={handleClose}
+                  uid={uid}
+                  />
                   <Button
                     type="button"
                     color="error"
@@ -230,9 +238,17 @@ export default function MainContent({ uid }: Props) {
                     <li>Start: {item.start_time}</li>
                     <li>End: {item.end_time}</li>
                   </ul>
-                  <Button type="button" color="primary">
+                  <Button type="button" color="primary" onClick={async () => {
+                  addMeeting();
+                  deleteMeeting(item.uid, item.id);
+                  }}>
                     UPDATE MEETING
                   </Button>
+                  <ModalContentMeeting
+                  open={showModalMeeting}
+                  onClose={handleClose}
+                  uid={uid}
+                  />
                   <Button
                     type="button"
                     color="error"
@@ -278,9 +294,13 @@ export default function MainContent({ uid }: Props) {
                     <li>{item.description}</li>
                     <li>Date: {item.date}</li>
                   </ul>
-                  <Button type="button" color="primary">
+                  <Button type="button" color="primary" onClick={async () => {
+                  addReminder();
+                  deleteReminder(item.uid, item.id);
+                  }}>
                     UPDATE REMINDER
                   </Button>
+                  <ModalContent open={showModal} onClose={handleClose} uid={uid} />
                   <Button
                     type="button"
                     color="error"
