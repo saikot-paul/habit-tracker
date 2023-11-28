@@ -10,6 +10,7 @@ import { FirebaseError } from "firebase/app";
 import "./assets/Login.css"; // Import your CSS file for styling
 import Home from "./pages/MainContent";
 import Register from "./pages/Register";
+import ForgotPassword from "./ForgotPassword";
 
 
 const Login: React.FC = () => {
@@ -73,7 +74,8 @@ const Login: React.FC = () => {
       }
     }
   };
-
+  const history = useNavigate()
+  const handleReset = ()=>{history("/reset")}
   return (
     <div>
       <div className="top-bar">
@@ -102,6 +104,7 @@ const Login: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          <p onClick = {handleReset}>Forgot Password?</p>
           <button type="submit" className="login-button">
             Login
           </button>
@@ -114,6 +117,7 @@ const Login: React.FC = () => {
           <Routes>
             <Route path="/maincontent" element={<Home />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/reset" element={<ForgotPassword />} />
           </Routes>
           {error && <p className="error-message">{error}</p>}
         </form>
