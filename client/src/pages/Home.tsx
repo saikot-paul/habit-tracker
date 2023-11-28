@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 import axios from "axios";
-import ModalContent from './ModalContent';
-
-import ModalContentTask from './ModalContentTask';
-import ModalContentMeeting from './ModalContentMeeting';
-
+import ModalContent from "./ModalContentReminder";
+import ModalContentTask from "./ModalContentTask";
+import ModalContentMeeting from "./ModalContentMeeting";
+import ModalContentUpdateTask from "./ModelContentUpdateTask";
+import ModalContentUpdateMeeting from "./ModalContentUpdateMeeting";
+import ModalContentUpdateReminder from "./ModalContentUpdateReminder";
 import Button from "@mui/material/Button";
 
 type Props = {
@@ -39,19 +40,20 @@ export default function MainContent({ uid }: Props) {
   const [taskList, setTask] = useState<tasks[]>();
   const [meetingList, setMeeting] = useState<meetings[]>();
   const [reminderList, setReminder] = useState<reminders[]>();
-  const [showModal, setShowModal] = useState(false);
 
+  const [showModal, setShowModal] = useState(false);
   const [showModalTask, setShowModalTask] = useState(false);
   const [showModalMeeting, setShowModalMeeting] = useState(false);
 
-
+  const [showUpdateTask, setUpdateTask] = useState(false);
+  const [showUpdateMeeting, setUpdateMeeting] = useState(false);
+  const [showUpdateReminder, setUpdateReminder] = useState(false);
 
   const baseURL = "http://localhost:5173/";
-  
+
   const addReminder = () => {
     setShowModal(true);
   };
-
 
   const addTask = () => {
     setShowModalTask(true);
@@ -61,6 +63,17 @@ export default function MainContent({ uid }: Props) {
     setShowModalMeeting(true);
   };
 
+  const updateTask = () => {
+    setUpdateTask(true);
+  };
+
+  const updateMeeting = () => {
+    setUpdateMeeting(true);
+  };
+
+  const updateReminder = () => {
+    setUpdateReminder(true);
+  };
 
   const handleClose = async () => {
     const updatedData = await fetch_data(uid);
@@ -71,9 +84,11 @@ export default function MainContent({ uid }: Props) {
       setReminder(updatedData.reminders);
     }
     setShowModal(false);
-
     setShowModalTask(false);
     setShowModalMeeting(false);
+    setUpdateTask(false);
+    setUpdateMeeting(false);
+    setUpdateReminder(false);
   };
 
   async function fetch_data(user_id: string) {
@@ -182,15 +197,21 @@ export default function MainContent({ uid }: Props) {
                   <ul>
                     <li>Due Date: {item.due_date}</li>
                   </ul>
-                  <Button type="button" color="primary">
+                  <Button type="button" color="primary" onClick={updateTask}>
                     UPDATE TASK
                   </Button>
+                  <ModalContentUpdateTask
+                    open={showUpdateTask}
+                    onClose={handleClose}
+                    uid={uid}
+                    docID={item.id}
+                  />
                   <Button
                     type="button"
                     color="error"
                     onClick={() => deleteTask(item.uid, item.id)}
                   >
-                    Delete Task
+                    DELETE TASK
                   </Button>
                 </div>
               ))}
@@ -230,9 +251,15 @@ export default function MainContent({ uid }: Props) {
                     <li>Start: {item.start_time}</li>
                     <li>End: {item.end_time}</li>
                   </ul>
-                  <Button type="button" color="primary">
+                  <Button type="button" color="primary" onClick={updateMeeting}>
                     UPDATE MEETING
                   </Button>
+                  <ModalContentUpdateMeeting
+                    open={showUpdateMeeting}
+                    uid={uid}
+                    onClose={handleClose}
+                    docID={item.id}
+                  />
                   <Button
                     type="button"
                     color="error"
@@ -275,12 +302,21 @@ export default function MainContent({ uid }: Props) {
                 <div className="sub-item" key={item.id}>
                   <h3>{item.description}</h3>
                   <ul>
-                    <li>{item.description}</li>
                     <li>Date: {item.date}</li>
                   </ul>
-                  <Button type="button" color="primary">
+                  <Button
+                    type="button"
+                    color="primary"
+                    onClick={updateReminder}
+                  >
                     UPDATE REMINDER
                   </Button>
+                  <ModalContentUpdateReminder
+                    uid={uid}
+                    open={showUpdateReminder}
+                    onClose={handleClose}
+                    docID={item.id}
+                  ></ModalContentUpdateReminder>
                   <Button
                     type="button"
                     color="error"

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
 import "./ModalContent.css";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -9,31 +9,38 @@ import axios from "axios";
 type Props = {
   open: boolean;
   uid: string;
+  docID: string;
   onClose: () => void;
 };
 
-export default function ModalContentTask({ open, onClose, uid }: Props) {
+export default function ModalContentUpdateReminder({
+  open,
+  onClose,
+  uid,
+  docID,
+}: Props) {
   const baseURL = "http://localhost:5173/";
   const [description, setDescription] = useState("");
-  const [due_date, setDate] = useState("");
+  const [date, setDate] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       console.log("uid:", uid);
       console.log("description:", description);
-      console.log("date:", due_date);
+      console.log("date:", date);
 
-      await axios.post(baseURL + "create_task", {
+      await axios.post(baseURL + "update_reminder", {
         uid: uid,
-        due_date: due_date,
         description: description,
+        date: date,
+        docID: docID,
       });
+
+      onClose();
     } catch (error) {
       console.error("Error submitting form:", error);
     }
-
-    onClose();
   };
 
   return (
@@ -54,11 +61,11 @@ export default function ModalContentTask({ open, onClose, uid }: Props) {
             </FormControl>
             <FormControl fullWidth>
               <TextField
-                label="Due Date"
+                label="Date"
                 variant="outlined"
                 margin="normal"
                 fullWidth
-                value={due_date}
+                value={date}
                 onChange={(e) => setDate(e.target.value)}
               />
             </FormControl>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
 import "./ModalContent.css";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -9,31 +9,41 @@ import axios from "axios";
 type Props = {
   open: boolean;
   uid: string;
+  docID: string;
   onClose: () => void;
 };
 
-export default function ModalContentTask({ open, onClose, uid }: Props) {
+export default function ModalContentUpdateMeeting({
+  open,
+  onClose,
+  uid,
+  docID,
+}: Props) {
   const baseURL = "http://localhost:5173/";
   const [description, setDescription] = useState("");
-  const [due_date, setDate] = useState("");
+  const [start_time, setStartTime] = useState("");
+  const [end_time, setEndTime] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       console.log("uid:", uid);
       console.log("description:", description);
-      console.log("date:", due_date);
+      console.log("start time:", start_time);
+      console.log("end time:", end_time);
 
-      await axios.post(baseURL + "create_task", {
+      await axios.post(baseURL + "update_meeting", {
         uid: uid,
-        due_date: due_date,
+        start_time: start_time,
+        end_time: end_time,
         description: description,
+        docID: docID,
       });
+
+      onClose();
     } catch (error) {
       console.error("Error submitting form:", error);
     }
-
-    onClose();
   };
 
   return (
@@ -54,12 +64,22 @@ export default function ModalContentTask({ open, onClose, uid }: Props) {
             </FormControl>
             <FormControl fullWidth>
               <TextField
-                label="Due Date"
+                label="Start Time"
                 variant="outlined"
                 margin="normal"
                 fullWidth
-                value={due_date}
-                onChange={(e) => setDate(e.target.value)}
+                value={start_time}
+                onChange={(e) => setStartTime(e.target.value)}
+              />
+            </FormControl>
+            <FormControl fullWidth>
+              <TextField
+                label="End Time"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                value={end_time}
+                onChange={(e) => setEndTime(e.target.value)}
               />
             </FormControl>
             <Button type="submit" variant="contained" color="primary">
