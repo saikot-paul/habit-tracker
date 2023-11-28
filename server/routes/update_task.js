@@ -4,10 +4,14 @@ const router = express.Router();
 
 router.post('/update_task', async (req, res) => {
 
+
     const uid = req.body.uid 
     const due_date = req.body.due_date
     const description = req.body.description
     const docID = req.body.docID
+
+    console.log('Called update task')
+    console.log(docID)
 
     const new_data = { 
         uid : uid, 
@@ -15,8 +19,9 @@ router.post('/update_task', async (req, res) => {
         description : description
     }
 
+
     try { 
-       
+        
         await db.collection('tasks').doc(docID).update(new_data)
         res.status(200).json({ message: 'Task updated successfully' });
        

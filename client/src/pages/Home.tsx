@@ -36,7 +36,6 @@ interface reminders {
 }
 
 export default function MainContent({ uid }: Props) {
-  const [userData, setUserData] = useState<string>("");
   const [taskList, setTask] = useState<tasks[]>();
   const [meetingList, setMeeting] = useState<meetings[]>();
   const [reminderList, setReminder] = useState<reminders[]>();
@@ -48,6 +47,10 @@ export default function MainContent({ uid }: Props) {
   const [showUpdateTask, setUpdateTask] = useState(false);
   const [showUpdateMeeting, setUpdateMeeting] = useState(false);
   const [showUpdateReminder, setUpdateReminder] = useState(false);
+
+  const [taskID, setTaskID] = useState("");
+  const [meetingID, setMeetingID] = useState("");
+  const [reminderID, setReminderID] = useState("");
 
   const baseURL = "http://localhost:5173/";
 
@@ -63,22 +66,24 @@ export default function MainContent({ uid }: Props) {
     setShowModalMeeting(true);
   };
 
-  const updateTask = () => {
+  const updateTask = (itemID: string) => {
+    setTaskID(itemID);
     setUpdateTask(true);
   };
 
-  const updateMeeting = () => {
+  const updateMeeting = (itemID: string) => {
+    setMeetingID(itemID);
     setUpdateMeeting(true);
   };
 
-  const updateReminder = () => {
+  const updateReminder = (itemID: string) => {
+    setReminderID(itemID);
     setUpdateReminder(true);
   };
 
   const handleClose = async () => {
     const updatedData = await fetch_data(uid);
     if (updatedData) {
-      setUserData(updatedData);
       setTask(updatedData.tasks);
       setMeeting(updatedData.meetings);
       setReminder(updatedData.reminders);
@@ -106,7 +111,6 @@ export default function MainContent({ uid }: Props) {
 
   useEffect(() => {
     fetch_data(uid).then((data) => {
-      setUserData(data);
       setTask(data.tasks);
       setMeeting(data.meetings);
       setReminder(data.reminders);
@@ -127,7 +131,6 @@ export default function MainContent({ uid }: Props) {
 
     const updatedData = await fetch_data(uid);
     if (updatedData) {
-      setUserData(updatedData);
       setTask(updatedData.tasks);
       setMeeting(updatedData.meetings);
       setReminder(updatedData.reminders);
@@ -147,7 +150,6 @@ export default function MainContent({ uid }: Props) {
 
     const updatedData = await fetch_data(uid);
     if (updatedData) {
-      setUserData(updatedData);
       setTask(updatedData.tasks);
       setMeeting(updatedData.meetings);
       setReminder(updatedData.reminders);
@@ -166,7 +168,6 @@ export default function MainContent({ uid }: Props) {
 
     const updatedData = await fetch_data(uid);
     if (updatedData) {
-      setUserData(updatedData);
       setTask(updatedData.tasks);
       setMeeting(updatedData.meetings);
       setReminder(updatedData.reminders);
@@ -175,7 +176,6 @@ export default function MainContent({ uid }: Props) {
 
   // Console logs for debugging
   console.log("User ID:", uid);
-  console.log("User Data:", userData);
   console.log("Tasks: ", taskList);
   console.log("Meetings: ", meetingList);
   console.log("Reminders: ", reminderList);
@@ -197,14 +197,18 @@ export default function MainContent({ uid }: Props) {
                   <ul>
                     <li>Due Date: {item.due_date}</li>
                   </ul>
-                  <Button type="button" color="primary" onClick={updateTask}>
+                  <Button
+                    type="button"
+                    color="primary"
+                    onClick={() => updateTask(item.id)}
+                  >
                     UPDATE TASK
                   </Button>
                   <ModalContentUpdateTask
                     open={showUpdateTask}
-                    onClose={handleClose}
                     uid={uid}
-                    docID={item.id}
+                    onClose={handleClose}
+                    docID={taskID}
                   />
                   <Button
                     type="button"
@@ -251,14 +255,18 @@ export default function MainContent({ uid }: Props) {
                     <li>Start: {item.start_time}</li>
                     <li>End: {item.end_time}</li>
                   </ul>
-                  <Button type="button" color="primary" onClick={updateMeeting}>
+                  <Button
+                    type="button"
+                    color="primary"
+                    onClick={() => updateMeeting(item.id)}
+                  >
                     UPDATE MEETING
                   </Button>
                   <ModalContentUpdateMeeting
                     open={showUpdateMeeting}
                     uid={uid}
                     onClose={handleClose}
-                    docID={item.id}
+                    docID={meetingID}
                   />
                   <Button
                     type="button"
@@ -307,7 +315,7 @@ export default function MainContent({ uid }: Props) {
                   <Button
                     type="button"
                     color="primary"
-                    onClick={updateReminder}
+                    onClick={() => updateReminder(item.id)}
                   >
                     UPDATE REMINDER
                   </Button>
@@ -315,7 +323,7 @@ export default function MainContent({ uid }: Props) {
                     uid={uid}
                     open={showUpdateReminder}
                     onClose={handleClose}
-                    docID={item.id}
+                    docID={reminderID}
                   ></ModalContentUpdateReminder>
                   <Button
                     type="button"

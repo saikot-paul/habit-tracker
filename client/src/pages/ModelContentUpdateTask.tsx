@@ -27,6 +27,7 @@ export default function ModalContentUpdateTask({
     e.preventDefault();
     try {
       console.log("uid:", uid);
+      console.log("docID:", docID);
       console.log("description:", description);
       console.log("date:", due_date);
 
