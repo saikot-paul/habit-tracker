@@ -6,7 +6,7 @@ import NavigationBar from '../components/navBar/NavigationBar';
 export default function Calendar() {
     return ( 
         <div>
-            <h1>hello</h1>
+            <NavigationBar />
             <BasicDateCalendar/>
         </div>
      );
