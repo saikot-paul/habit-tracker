@@ -1,4 +1,4 @@
-# Productivity Application Overview
+# Habit Tracker WebApp 
 
 ## Purpose
 We aim to develop a productivity application focused on aiding individuals, especially students, to enhance their time management and organizational skills. The application is designed to address challenges related to stress and academic performance by structuring various daily activities, including academic classes, meetings, and personal events.
@@ -28,7 +28,7 @@ We aim to develop a productivity application focused on aiding individuals, espe
 
 ## Technical Stack
 - **Frontend**: Developed with React.js, making API calls for data handling.
-- **Backend and Database**: Utilizing Firebase for both backend services and database. Manages user authentication and data storage.
+- **Backend and Database**: Utilizing Express for both backend services and Firebase for database/authentication. 
 - **Data Synchronization**: Real-time data sync between the frontend and Firebase database through API calls.
 
 ## Clarifications and Adjustments
